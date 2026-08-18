@@ -1,0 +1,2795 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <meta name="description" content="Mechanika Kowalski — profesjonalny warsztat samochodowy. Klimatyzacja, serwis opon, diagnostyka komputerowa i naprawy silników.">
+
+  <title>Mechanika Kowalski | Solidna mechanika. Bez ściemy.</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --black: #07090a;
+      --dark: #0c0f10;
+      --card: #15191b;
+      --card-hover: #1a1f21;
+
+      --white: #f5f5f3;
+      --gray: #9da3a6;
+      --gray-light: #c8ccce;
+
+      --orange: #e4772e;
+      --orange-light: #f18b42;
+
+      --border: rgba(255,255,255,.09);
+      --border-orange: rgba(228,119,46,.5);
+
+      --container: 1200px;
+      --transition: .3s ease;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      scroll-padding-top: 90px;
+    }
+
+    body {
+      background: var(--black);
+      color: var(--white);
+      font-family: "Inter", sans-serif;
+      line-height: 1.5;
+      overflow-x: hidden;
+    }
+
+    body::after {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 9999;
+      opacity: .025;
+
+      background-image:
+        repeating-linear-gradient(
+          0deg,
+          rgba(255,255,255,.7) 0,
+          rgba(255,255,255,.7) 1px,
+          transparent 1px,
+          transparent 4px
+        );
+    }
+
+    body.menu-open {
+      overflow: hidden;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    img {
+      display: block;
+      width: 100%;
+    }
+
+    button,
+    input,
+    textarea {
+      font: inherit;
+    }
+
+    .container {
+      width: min(100% - 28px, var(--container));
+      margin-inline: auto;
+    }
+
+
+    /* =========================
+       HEADER
+    ========================= */
+
+    header {
+      position: absolute;
+      inset: 0 0 auto;
+      z-index: 1000;
+
+      background: rgba(5,7,8,.78);
+      border-bottom: 1px solid rgba(255,255,255,.07);
+
+      backdrop-filter: blur(14px);
+    }
+
+    .header-inner {
+      min-height: 74px;
+
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      gap: 15px;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+
+      position: relative;
+      z-index: 1002;
+    }
+
+    .logo-symbol {
+      width: 40px;
+      height: 40px;
+
+      position: relative;
+      flex-shrink: 0;
+
+      display: grid;
+      place-items: center;
+    }
+
+    .gear {
+      position: absolute;
+      inset: 4px;
+
+      border: 4px dotted var(--orange);
+      border-radius: 50%;
+    }
+
+    .wrench {
+      position: absolute;
+
+      width: 25px;
+      height: 6px;
+
+      background: var(--orange);
+
+      border-radius: 5px;
+
+      transform: rotate(-45deg);
+    }
+
+    .wrench::before {
+      content: "";
+
+      position: absolute;
+
+      width: 12px;
+      height: 12px;
+
+      right: -4px;
+      top: -4px;
+
+      border: 4px solid var(--orange);
+      border-left-color: transparent;
+
+      border-radius: 50%;
+    }
+
+    .wrench-two {
+      transform: rotate(45deg);
+      opacity: .8;
+    }
+
+    .logo-text {
+      font-family: "Barlow Condensed", sans-serif;
+
+      font-size: 1.25rem;
+      font-weight: 800;
+
+      line-height: .78;
+
+      text-transform: uppercase;
+      letter-spacing: .02em;
+    }
+
+    .logo-text span {
+      display: block;
+      color: var(--orange);
+    }
+
+    .logo-subtitle {
+      display: block;
+
+      margin-top: 5px;
+
+      color: #858b8e;
+
+      font-family: "Inter", sans-serif;
+
+      font-size: .36rem;
+      font-weight: 700;
+
+      letter-spacing: .2em;
+    }
+
+
+    /* =========================
+       DESKTOP NAV
+    ========================= */
+
+    .nav {
+      display: none;
+    }
+
+    .header-phone {
+      display: none;
+    }
+
+
+    /* =========================
+       MOBILE HAMBURGER
+    ========================= */
+
+    .menu-toggle {
+      width: 45px;
+      height: 45px;
+
+      position: relative;
+      z-index: 1002;
+
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+
+      gap: 5px;
+
+      background: transparent;
+
+      border: 1px solid rgba(228,119,46,.5);
+      border-radius: 10px;
+
+      color: var(--orange);
+
+      cursor: pointer;
+
+      transition: .3s ease;
+    }
+
+    .menu-toggle span {
+      width: 19px;
+      height: 2px;
+
+      display: block;
+
+      background: currentColor;
+
+      transition: .3s ease;
+    }
+
+    .menu-toggle.active {
+      background: var(--orange);
+      color: #080909;
+    }
+
+    .menu-toggle.active span:nth-child(1) {
+      transform: translateY(7px) rotate(45deg);
+    }
+
+    .menu-toggle.active span:nth-child(2) {
+      opacity: 0;
+    }
+
+    .menu-toggle.active span:nth-child(3) {
+      transform: translateY(-7px) rotate(-45deg);
+    }
+
+
+    /* =========================
+       MOBILE MENU
+    ========================= */
+
+    .mobile-menu {
+      position: fixed;
+      top: 0;
+      right: 0;
+
+      width: min(86%, 390px);
+      height: 100svh;
+
+      padding: 115px 30px 40px;
+
+      background:
+        linear-gradient(
+          145deg,
+          rgba(18,22,23,.99),
+          rgba(7,9,10,.99)
+        );
+
+      border-left: 1px solid rgba(228,119,46,.3);
+
+      transform: translateX(100%);
+
+      transition: transform .4s cubic-bezier(.77,0,.18,1);
+
+      box-shadow: -25px 0 70px rgba(0,0,0,.4);
+
+      overflow-y: auto;
+    }
+
+    .mobile-menu.active {
+      transform: translateX(0);
+    }
+
+    .mobile-menu-label {
+      margin-bottom: 25px;
+
+      color: var(--orange);
+
+      font-size: .6rem;
+      font-weight: 800;
+
+      letter-spacing: .2em;
+
+      text-transform: uppercase;
+    }
+
+    .mobile-nav {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .mobile-nav a {
+      padding: 20px 0;
+
+      border-bottom: 1px solid rgba(255,255,255,.08);
+
+      font-family: "Barlow Condensed", sans-serif;
+
+      font-size: 2.25rem;
+      font-weight: 700;
+
+      line-height: 1;
+
+      text-transform: uppercase;
+
+      transition: .25s ease;
+    }
+
+    .mobile-nav a:hover,
+    .mobile-nav a:active {
+      color: var(--orange);
+      padding-left: 8px;
+    }
+
+    .mobile-phone {
+      margin-top: 35px;
+    }
+
+    .mobile-phone small {
+      display: block;
+
+      margin-bottom: 7px;
+
+      color: var(--orange);
+
+      font-size: .58rem;
+      font-weight: 700;
+
+      letter-spacing: .15em;
+
+      text-transform: uppercase;
+    }
+
+    .mobile-phone a {
+      font-family: "Barlow Condensed", sans-serif;
+
+      font-size: 1.8rem;
+    }
+
+    .mobile-call {
+      margin-top: 20px;
+
+      width: 100%;
+      min-height: 55px;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      background: var(--orange);
+
+      border-radius: 13px;
+
+      color: #080909;
+
+      font-size: .7rem;
+      font-weight: 800;
+
+      letter-spacing: .12em;
+
+      text-transform: uppercase;
+    }
+
+    .mobile-overlay {
+      position: fixed;
+      inset: 0;
+
+      z-index: -1;
+
+      background: rgba(0,0,0,.65);
+
+      opacity: 0;
+      visibility: hidden;
+
+      transition: .3s ease;
+    }
+
+    .mobile-overlay.active {
+      opacity: 1;
+      visibility: visible;
+    }
+
+
+    /* =========================
+       HERO
+    ========================= */
+
+    .hero {
+      min-height: 720px;
+      height: 100svh;
+      max-height: 900px;
+
+      position: relative;
+
+      display: flex;
+      align-items: center;
+
+      overflow: hidden;
+
+      background:
+        linear-gradient(
+          90deg,
+          rgba(4,6,7,.99) 0%,
+          rgba(4,6,7,.94) 35%,
+          rgba(4,6,7,.67) 65%,
+          rgba(4,6,7,.25) 100%
+        ),
+
+        linear-gradient(
+          0deg,
+          rgba(4,6,7,.85),
+          transparent 55%
+        ),
+
+        url("https://images.unsplash.com/photo-1487754180451-c456f719a1fc?auto=format&fit=crop&w=2200&q=90")
+        center / cover no-repeat;
+    }
+
+    .hero::before {
+      content: "";
+
+      position: absolute;
+      inset: 0;
+
+      background:
+        linear-gradient(
+          115deg,
+          transparent 20%,
+          rgba(228,119,46,.06),
+          transparent 65%
+        );
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+
+      padding-top: 70px;
+    }
+
+    .hero-label {
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+
+      gap: 11px;
+
+      margin-bottom: 19px;
+
+      color: var(--orange-light);
+
+      font-size: .63rem;
+      font-weight: 800;
+
+      letter-spacing: .18em;
+
+      text-transform: uppercase;
+    }
+
+    .hero-label::before {
+      content: "";
+
+      width: 30px;
+      height: 2px;
+
+      background: var(--orange);
+    }
+
+    .hero h1 {
+      font-family: "Barlow Condensed", sans-serif;
+
+      font-size: clamp(4.3rem, 18vw, 9.5rem);
+
+      line-height: .77;
+
+      font-weight: 800;
+
+      letter-spacing: -.045em;
+
+      text-transform: uppercase;
+    }
+
+    .hero h1 span {
+      color: var(--orange);
+    }
+
+    .hero-slogan {
+      margin-top: 25px;
+
+      color: #d5d7d8;
+
+      font-family: "Barlow Condensed", sans-serif;
+
+      font-size: clamp(1.15rem, 4vw, 2rem);
+
+      line-height: 1;
+
+      letter-spacing: .08em;
+
+      text-transform: uppercase;
+    }
+
+    .hero-description {
+      max-width: 510px;
+
+      margin-top: 14px;
+
+      color: #a5aaad;
+
+      font-size: .78rem;
+
+      line-height: 1.7;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-direction: column;
+
+      align-items: flex-start;
+
+      gap: 13px;
+
+      margin-top: 28px;
+    }
+
+
+    /* =========================
+       BUTTON
+    ========================= */
+
+    .btn {
+      min-height: 55px;
+
+      padding: 0 28px;
+
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+
+      gap: 9px;
+
+      background: var(--orange);
+
+      border: 1px solid var(--orange);
+
+      border-radius: 12px;
+
+      color: #090a0a;
+
+      font-size: .7rem;
+      font-weight: 800;
+
+      letter-spacing: .12em;
+
+      text-transform: uppercase;
+
+      transition: var(--transition);
+    }
+
+    .btn:hover {
+      background: var(--orange-light);
+      border-color: var(--orange-light);
+
+      transform: translateY(-3px);
+
+      box-shadow: 0 15px 35px rgba(228,119,46,.25);
+    }
+
+    .hero-phone {
+      display: flex;
+      align-items: center;
+
+      gap: 11px;
+
+      font-family: "Barlow Condensed", sans-serif;
+
+      font-size: 1.5rem;
+      font-weight: 600;
+    }
+
+    .hero-phone-icon {
+      width: 34px;
+      height: 34px;
+
+      display: grid;
+      place-items: center;
+
+      border: 1px solid var(--orange);
+      border-radius: 50%;
+
+      color: var(--orange);
+
+      font-size: .85rem;
+    }
+
+    .hero-bottom {
+      position: absolute;
+
+      left: 0;
+      bottom: 22px;
+
+      width: 100%;
+
+      z-index: 2;
+    }
+
+    .scroll-indicator {
+      color: #6e7477;
+
+      font-size: .55rem;
+
+      text-transform: uppercase;
+
+      letter-spacing: .2em;
+    }
+
+
+    /* =========================
+       SECTIONS
+    ========================= */
+
+    .section {
+      padding: 78px 0;
+    }
+
+    .section-heading {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+
+    .section-label {
+      color: var(--orange);
+
+      font-family: "Barlow Condensed", sans-serif;
+
+      font-size: .75rem;
+      font-weight: 700;
+
+      letter-spacing: .2em;
+
+      text-transform: uppercase;
+    }
+
+    .section-title {
+      margin-top: 3px;
+
+      font-family: "Barlow Condensed", sans-serif;
+
+      font-size: clamp(2.7rem, 9vw, 4.5rem);
+
+      line-height: .88;
+
+      text-transform: uppercase;
+
+      letter-spacing: -.025em;
+    }
+
+    .section-line {
+      width: 50px;
+      height: 2px;
+
+      margin: 17px auto 0;
+
+      background: var(--orange);
+    }
+
+
+    /* =========================
+       SERVICES
+    ========================= */
+
+    .services {
+      background:
+        radial-gradient(
+          circle at 50% 0,
+          rgba(228,119,46,.05),
+          transparent 42%
+        ),
+        #101315;
+
+      border-top: 1px solid var(--border);
+    }
+
+    .services-grid {
+      display: grid;
+
+      grid-template-columns: 1fr;
+
+      gap: 13px;
+    }
+
+    .service-card {
+      min-height: 315px;
+
+      position: relative;
+
+      overflow: hidden;
+
+      background: var(--card);
+
+      border: 1px solid rgba(255,255,255,.11);
+
+      transition: var(--transition);
+    }
+
+    .service-card:hover {
+      border-color: var(--border-orange);
+
+      transform: translateY(-5px);
+
+      box-shadow: 0 18px 45px rgba(0,0,0,.35);
+    }
+
+    .service-image {
+      height: 175px;
+
+      position: relative;
+      overflow: hidden;
+    }
+
+    .service-image::after {
+      content: "";
+
+      position: absolute;
+      inset: 0;
+
+      background:
+        linear-gradient(
+          0deg,
+          rgba(12,14,15,.96),
+          transparent 70%
+        );
+    }
+
+    .service-image img {
+      height: 100%;
+
+      object-fit: cover;
+
+      filter: brightness(.68) saturate(.65);
+
+      transition:
+        transform .6s ease,
+        filter .6s ease;
+    }
+
+    .service-card:hover .service-image img {
+      transform: scale(1.07);
+
+      filter: brightness(.82) saturate(.8);
+    }
+
+    .service-content {
+      position: relative;
+      z-index: 2;
+
+      margin-top: -28px;
+
+      padding: 0 23px 25px;
+    }
+
+    .service-icon {
+      width: 43px;
+      height: 43px;
+
+      display: grid;
+      place-items: center;
+
+      margin-bottom: 14px;
+
+      background: #111416;
+
+      border: 1px solid var(--border-orange);
+
+      color: var(--orange);
+
+      font-size: 1.1rem;
+    }
+
+    .service-card h3 {
+      font-family: "Barlow Condensed", sans-serif;
+
+      font-size: 1.65rem;
+
+      line-height: .95;
+
+      text-transform: uppercase;
+
+      letter-spacing: .025em;
+    }
+
+    .service-card p {
+      margin-top: 9px;
+
+      color: #8f9699;
+
+      font-size: .71rem;
+
+      line-height: 1.55;
+    }
+
+
+    /* =========================
+       WHY US
+    ========================= */
+
+    .why-us {
+      background: #0c0f10;
+
+      border-top: 1px solid var(--border);
+    }
+
+    .advantages {
+      display: grid;
+
+      grid-template-columns: 1fr;
+
+      border-top: 1px solid var(--border);
+      border-left: 1px solid var(--border);
+    }
+
+    .advantage {
+      min-height: 185px;
+
+      padding: 28px 20px;
+
+      text-align: center;
+
+      border-right: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+
+      transition: var(--transition);
+    }
+
+    .advantage:hover {
+      background: rgba(228,119,46,.035);
+    }
+
+    .advantage-icon {
+      width: 50px;
+      height: 50px;
+
+      display: grid;
+      place-items: center;
+
+      margin: 0 auto 15px;
+
+      border: 1px solid var(--orange);
+      border-radius: 50%;
+
+      color: var(--orange);
+
+      font-size: 1.15rem;
+    }
+
+    .advantage h3 {
+      font-family: "Barlow Condensed", sans-serif;
+
+      font-size: 1.25rem;
+
+      text-transform: uppercase;
+
+      letter-spacing: .05em;
+    }
+
+    .advantage p {
+      max-width: 230px;
+
+      margin: 6px auto 0;
+
+      color: #858b8e;
+
+      font-size: .68rem;
+
+      line-height: 1.6;
+    }
+
+
+    /* =========================
+       GALLERY
+    ========================= */
+
+    .gallery {
+      background: #101315;
+    }
+
+    .gallery-grid {
+      display: grid;
+
+      grid-template-columns: 1fr;
+
+      gap: 10px;
+    }
+
+    .gallery-item {
+      height: 235px;
+
+      position: relative;
+
+      overflow: hidden;
+
+      border: 1px solid rgba(255,255,255,.1);
+    }
+
+    .gallery-item img {
+      height: 100%;
+
+      object-fit: cover;
+
+      filter: brightness(.68) saturate(.65);
+
+      transition:
+        transform .6s ease,
+        filter .6s ease;
+    }
+
+    .gallery-item:hover img {
+      transform: scale(1.06);
+
+      filter: brightness(.88) saturate(.8);
+    }
+
+    .gallery-overlay {
+      position: absolute;
+
+      inset: auto 0 0;
+
+      padding: 22px 18px 17px;
+
+      background:
+        linear-gradient(
+          transparent,
+          rgba(0,0,0,.9)
+        );
+    }
+
+    .gallery-overlay span {
+      color: var(--orange);
+
+      font-family: "Barlow Condensed", sans-serif;
+
+      font-size: .72rem;
+
+      letter-spacing: .15em;
+
+      text-transform: uppercase;
+    }
+
+
+    /* =========================
+       CONTACT
+    ========================= */
+
+    .contact {
+      background:
+        radial-gradient(
+          circle at 80% 50%,
+          rgba(228,119,46,.05),
+          transparent 35%
+        ),
+        #0b0d0e;
+
+      border-top: 1px solid var(--border);
+    }
+
+    .contact-grid {
+      display: grid;
+
+      grid-template-columns: 1fr;
+
+      gap: 30px;
+    }
+
+    .contact-info {
+      display: grid;
+      gap: 25px;
+    }
+
+    .contact-row {
+      display: flex;
+
+      align-items: flex-start;
+
+      gap: 15px;
+    }
+
+    .contact-icon {
+      width: 43px;
+      height: 43px;
+
+      flex-shrink: 0;
+
+      display: grid;
+      place-items: center;
+
+      border: 1px solid var(--orange);
+
+      color: var(--orange);
+
+      font-size: .95rem;
+    }
+
+    .contact-row small {
+      display: block;
+
+      margin-bottom: 4px;
+
+      color: var(--orange);
+
+      font-size: .57rem;
+      font-weight: 700;
+
+      letter-spacing: .15em;
+
+      text-transform: uppercase;
+    }
+
+    .contact-row strong,
+    .contact-row a {
+      font-family: "Barlow Condensed", sans-serif;
+
+      font-size: 1.35rem;
+
+      line-height: 1.15;
+    }
+
+    .contact-row a:hover {
+      color: var(--orange);
+    }
+
+    .contact-row p {
+      color: #8e9497;
+
+      font-size: .72rem;
+
+      line-height: 1.7;
+    }
+
+
+    /* =========================
+       GOOGLE MAPS
+    ========================= */
+
+    .map-box {
+      min-height: 350px;
+
+      position: relative;
+
+      overflow: hidden;
+
+      background: #111;
+
+      border: 1px solid var(--border-orange);
+    }
+
+    .map-box iframe {
+      width: 100%;
+      height: 100%;
+
+      min-height: 350px;
+
+      display: block;
+
+      border: 0;
+
+      filter:
+        grayscale(100%)
+        contrast(1.1)
+        brightness(.65);
+    }
+
+    .map-button {
+      position: absolute;
+
+      left: 18px;
+      right: 18px;
+      bottom: 18px;
+
+      min-height: 51px;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      background: var(--orange);
+
+      border-radius: 12px;
+
+      color: #080909;
+
+      font-size: .65rem;
+      font-weight: 800;
+
+      letter-spacing: .1em;
+
+      text-transform: uppercase;
+
+      transition: var(--transition);
+    }
+
+    .map-button:hover {
+      background: var(--orange-light);
+
+      transform: translateY(-2px);
+    }
+
+
+    /* =========================
+       FOOTER
+    ========================= */
+
+    footer {
+      padding: 50px 0 22px;
+
+      background: #07090a;
+
+      border-top: 1px solid var(--border);
+    }
+
+    .footer-grid {
+      display: grid;
+
+      grid-template-columns: 1fr;
+
+      gap: 32px;
+    }
+
+    .footer-description {
+      max-width: 280px;
+
+      margin-top: 17px;
+
+      color: #73797c;
+
+      font-size: .68rem;
+
+      line-height: 1.7;
+    }
+
+    .footer-column h4 {
+      margin-bottom: 13px;
+
+      color: var(--orange);
+
+      font-family: "Barlow Condensed", sans-serif;
+
+      font-size: .95rem;
+
+      letter-spacing: .15em;
+
+      text-transform: uppercase;
+    }
+
+    .footer-links {
+      display: grid;
+
+      gap: 8px;
+    }
+
+    .footer-links a {
+      color: #858b8e;
+
+      font-size: .68rem;
+
+      transition: var(--transition);
+    }
+
+    .footer-links a:hover {
+      color: var(--orange);
+
+      transform: translateX(4px);
+    }
+
+    .socials {
+      display: flex;
+
+      gap: 9px;
+
+      margin-top: 17px;
+    }
+
+    .social {
+      width: 38px;
+      height: 38px;
+
+      display: grid;
+      place-items: center;
+
+      border: 1px solid var(--border-orange);
+
+      color: var(--orange);
+
+      font-size: .75rem;
+
+      transition: var(--transition);
+    }
+
+    .social:hover {
+      background: var(--orange);
+
+      color: #080909;
+    }
+
+    .copyright {
+      margin-top: 40px;
+
+      padding-top: 19px;
+
+      border-top: 1px solid rgba(255,255,255,.06);
+
+      color: #575d60;
+
+      text-align: center;
+
+      font-size: .58rem;
+    }
+
+
+    /* =========================
+       TABLET
+    ========================= */
+
+    @media (min-width: 650px) {
+
+      .container {
+        width: min(100% - 60px, var(--container));
+      }
+
+      .hero-actions {
+        flex-direction: row;
+        align-items: center;
+      }
+
+      .hero-actions .btn {
+        min-width: 190px;
+      }
+
+      .services-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .service-card {
+        min-height: 330px;
+      }
+
+      .advantages {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .gallery-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .footer-grid {
+        grid-template-columns: 1.5fr 1fr 1fr;
+      }
+    }
+
+
+    /* =========================
+       DESKTOP
+    ========================= */
+
+    @media (min-width: 950px) {
+
+      .container {
+        width: min(100% - 80px, var(--container));
+      }
+
+      .header-inner {
+        min-height: 92px;
+      }
+
+      .menu-toggle,
+      .mobile-menu,
+      .mobile-overlay {
+        display: none;
+      }
+
+      .nav {
+        display: flex;
+
+        align-items: center;
+
+        gap: 38px;
+      }
+
+      .nav a {
+        position: relative;
+
+        color: #cdd0d1;
+
+        font-size: .66rem;
+        font-weight: 700;
+
+        letter-spacing: .12em;
+
+        text-transform: uppercase;
+
+        transition: var(--transition);
+      }
+
+      .nav a::after {
+        content: "";
+
+        position: absolute;
+
+        left: 0;
+        bottom: -9px;
+
+        width: 0;
+        height: 1px;
+
+        background: var(--orange);
+
+        transition: width .3s ease;
+      }
+
+      .nav a:hover {
+        color: #fff;
+      }
+
+      .nav a:hover::after {
+        width: 100%;
+      }
+
+      .header-phone {
+        display: flex;
+
+        align-items: center;
+
+        gap: 10px;
+
+        padding: 12px 18px;
+
+        border: 1px solid var(--orange);
+        border-radius: 10px;
+
+        font-family: "Barlow Condensed", sans-serif;
+
+        font-size: 1.05rem;
+
+        transition: var(--transition);
+      }
+
+      .header-phone span {
+        color: var(--orange);
+      }
+
+      .header-phone:hover {
+        background: rgba(228,119,46,.1);
+      }
+
+      .hero-content {
+        padding-top: 75px;
+      }
+
+      .hero-description {
+        font-size: .87rem;
+      }
+
+      .services-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .service-card {
+        min-height: 365px;
+      }
+
+      .service-image {
+        height: 205px;
+      }
+
+      .advantages {
+        grid-template-columns: repeat(4, 1fr);
+      }
+
+      .gallery-grid {
+        grid-template-columns: repeat(4, 1fr);
+      }
+
+      .gallery-item {
+        height: 250px;
+      }
+
+      .contact-grid {
+        grid-template-columns: .8fr 1.2fr;
+        align-items: stretch;
+      }
+
+      .map-box,
+      .map-box iframe {
+        min-height: 390px;
+      }
+
+      .footer-grid {
+        grid-template-columns: 1.5fr 1fr 1fr 1fr;
+      }
+    }
+
+
+    /* =========================
+       LARGE DESKTOP
+    ========================= */
+
+    @media (min-width: 1200px) {
+
+      .hero h1 {
+        font-size: 9.5rem;
+      }
+
+      .hero {
+        background-position: center 45%;
+      }
+
+      .service-card {
+        min-height: 390px;
+      }
+
+      .service-image {
+        height: 220px;
+      }
+    }
+
+
+    /* =========================
+       MOBILE HERO
+    ========================= */
+
+    @media (max-width: 480px) {
+
+      .hero {
+        min-height: 100svh;
+        height: 100svh;
+        max-height: none;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        text-align: center;
+
+        background:
+          linear-gradient(
+            180deg,
+            rgba(4,6,7,.88) 0%,
+            rgba(4,6,7,.68) 45%,
+            rgba(4,6,7,.95) 100%
+          ),
+
+          url("https://images.unsplash.com/photo-1487754180451-c456f719a1fc?auto=format&fit=crop&w=1600&q=90")
+          center / cover no-repeat;
+      }
+
+      .hero-content {
+        width: 100%;
+
+        padding-top: 35px;
+
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .hero-label {
+        justify-content: center;
+
+        margin-bottom: 22px;
+
+        font-size: .6rem;
+        letter-spacing: .14em;
+      }
+
+      .hero-label::before {
+        width: 25px;
+      }
+
+      .hero h1 {
+        width: 100%;
+
+        font-size: clamp(5rem, 22vw, 6.4rem);
+
+        line-height: .73;
+
+        letter-spacing: -.055em;
+
+        text-align: center;
+      }
+
+      .hero-slogan {
+        margin-top: 27px;
+
+        font-size: 1.25rem;
+
+        letter-spacing: .08em;
+
+        text-align: center;
+      }
+
+      .hero-description {
+        max-width: 330px;
+
+        margin-top: 15px;
+
+        font-size: .76rem;
+
+        line-height: 1.65;
+
+        text-align: center;
+      }
+
+      .hero-actions {
+        width: 100%;
+
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        gap: 15px;
+
+        margin-top: 30px;
+      }
+
+      .hero-actions .btn {
+        width: auto;
+
+        min-width: 235px;
+        min-height: 60px;
+
+        padding: 0 32px;
+
+        border-radius: 18px;
+
+        font-size: .72rem;
+
+        letter-spacing: .11em;
+      }
+
+      .hero-phone {
+        justify-content: center;
+
+        font-size: 1.5rem;
+
+        text-align: center;
+      }
+
+      .hero-phone-icon {
+        width: 36px;
+        height: 36px;
+
+        font-size: .85rem;
+      }
+
+      .hero-bottom {
+        bottom: 18px;
+
+        text-align: center;
+      }
+
+      .scroll-indicator {
+        font-size: .48rem;
+
+        letter-spacing: .17em;
+      }
+
+      .section {
+        padding: 70px 0;
+      }
+
+      .section-title {
+        font-size: 3rem;
+      }
+
+      .service-card {
+        min-height: 305px;
+      }
+
+      .service-image {
+        height: 165px;
+      }
+
+      .service-content {
+        padding-left: 20px;
+        padding-right: 20px;
+      }
+
+      .service-card h3 {
+        font-size: 1.55rem;
+      }
+
+      .map-box,
+      .map-box iframe {
+        min-height: 330px;
+      }
+
+      .footer-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .footer-brand {
+        grid-column: 1 / -1;
+      }
+    }
+
+
+    /* =========================
+       381–480 PX
+    ========================= */
+
+    @media (min-width: 381px) and (max-width: 480px) {
+
+      .hero h1 {
+        font-size: 6rem;
+      }
+
+      .hero-slogan {
+        font-size: 1.3rem;
+      }
+
+      .hero-description {
+        max-width: 350px;
+
+        font-size: .78rem;
+      }
+
+      .hero-actions .btn {
+        min-width: 245px;
+        min-height: 63px;
+
+        border-radius: 19px;
+      }
+
+      .hero-phone {
+        font-size: 1.55rem;
+      }
+    }
+
+
+    /* =========================
+       MAŁE TELEFONY
+    ========================= */
+
+    @media (max-width: 380px) {
+
+      .container {
+        width: min(100% - 22px, var(--container));
+      }
+
+      .header-inner {
+        min-height: 68px;
+      }
+
+      .logo-symbol {
+        width: 35px;
+        height: 35px;
+      }
+
+      .logo-text {
+        font-size: 1.08rem;
+      }
+
+      .menu-toggle {
+        width: 42px;
+        height: 42px;
+      }
+
+      .hero {
+        min-height: 100svh;
+        height: 100svh;
+      }
+
+      .hero-content {
+        padding-top: 38px;
+      }
+
+      .hero h1 {
+        font-size: 5.25rem;
+
+        line-height: .73;
+      }
+
+      .hero-slogan {
+        margin-top: 22px;
+
+        font-size: 1.05rem;
+      }
+
+      .hero-description {
+        max-width: 290px;
+
+        font-size: .68rem;
+      }
+
+      .hero-actions {
+        margin-top: 23px;
+      }
+
+      .hero-actions .btn {
+        min-width: 220px;
+
+        min-height: 57px;
+
+        padding: 0 22px;
+
+        border-radius: 17px;
+
+        font-size: .63rem;
+      }
+
+      .hero-phone {
+        font-size: 1.25rem;
+      }
+
+      .section-title {
+        font-size: 2.65rem;
+      }
+
+      .mobile-menu {
+        width: 90%;
+        padding-left: 25px;
+        padding-right: 25px;
+      }
+
+      .mobile-nav a {
+        font-size: 2rem;
+      }
+    }
+
+
+    /* =========================
+       REDUCED MOTION
+    ========================= */
+
+    @media (prefers-reduced-motion: reduce) {
+
+      html {
+        scroll-behavior: auto;
+      }
+
+      *,
+      *::before,
+      *::after {
+        transition: none !important;
+      }
+    }
+  </style>
+</head>
+
+
+<body>
+
+
+  <!-- =========================
+       HEADER
+  ========================= -->
+
+  <header>
+
+    <div class="container header-inner">
+
+      <a href="#start" class="logo js-close-menu" aria-label="Mechanika Kowalski - strona główna">
+
+        <div class="logo-symbol" aria-hidden="true">
+          <div class="gear"></div>
+          <div class="wrench"></div>
+          <div class="wrench wrench-two"></div>
+        </div>
+
+        <div class="logo-text">
+          Mechanika
+          <span>Kowalski</span>
+
+          <small class="logo-subtitle">
+            Serwis samochodowy
+          </small>
+        </div>
+
+      </a>
+
+
+      <!-- DESKTOP -->
+
+      <nav class="nav" aria-label="Główna nawigacja">
+
+        <a href="#uslugi">Usługi</a>
+
+        <a href="#o-nas">O nas</a>
+
+        <a href="#kontakt">Kontakt</a>
+
+      </nav>
+
+
+      <a href="tel:+48123456789" class="header-phone">
+
+        <span>☎</span>
+
+        +48 123 456 789
+
+      </a>
+
+
+      <!-- MOBILE HAMBURGER -->
+
+      <button
+        class="menu-toggle"
+        id="menuToggle"
+        type="button"
+        aria-label="Otwórz menu"
+        aria-expanded="false"
+        aria-controls="mobileMenu"
+      >
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+
+
+      <!-- MOBILE MENU -->
+
+      <div class="mobile-menu" id="mobileMenu">
+
+        <div class="mobile-menu-label">
+          Nawigacja
+        </div>
+
+
+        <nav class="mobile-nav" aria-label="Menu mobilne">
+
+          <a href="#uslugi">
+            Usługi
+          </a>
+
+          <a href="#o-nas">
+            O nas
+          </a>
+
+          <a href="#kontakt">
+            Kontakt
+          </a>
+
+        </nav>
+
+
+        <div class="mobile-phone">
+
+          <small>
+            Zadzwoń do nas
+          </small>
+
+          <a href="tel:+48123456789">
+            +48 123 456 789
+          </a>
+
+        </div>
+
+
+        <a href="tel:+48123456789" class="mobile-call">
+          ☎ Zadzwoń teraz
+        </a>
+
+      </div>
+
+
+      <div class="mobile-overlay" id="mobileOverlay"></div>
+
+    </div>
+
+  </header>
+
+
+
+  <main id="start">
+
+
+    <!-- =========================
+         HERO
+    ========================= -->
+
+    <section class="hero">
+
+      <div class="container hero-content">
+
+        <div class="hero-label">
+          Profesjonalny serwis samochodowy
+        </div>
+
+
+        <h1>
+          Mechanika<br>
+          <span>Kowalski</span>
+        </h1>
+
+
+        <div class="hero-slogan">
+          Solidna mechanika. Bez ściemy.
+        </div>
+
+
+        <p class="hero-description">
+
+          Profesjonalny serwis samochodowy.
+          Konkretna diagnoza, uczciwa wycena
+          i fachowo wykonana robota.
+
+        </p>
+
+
+        <div class="hero-actions">
+
+          <a href="tel:+48123456789" class="btn">
+            ☎ Zadzwoń teraz
+          </a>
+
+          <a href="tel:+48123456789" class="hero-phone">
+
+            <span class="hero-phone-icon">
+              ☎
+            </span>
+
+            +48 123 456 789
+
+          </a>
+
+        </div>
+
+      </div>
+
+
+      <div class="hero-bottom">
+
+        <div class="container">
+
+          <div class="scroll-indicator">
+            ↓ Przewiń, aby zobaczyć więcej
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+
+    <!-- =========================
+         USŁUGI
+    ========================= -->
+
+    <section class="section services" id="uslugi">
+
+      <div class="container">
+
+        <div class="section-heading">
+
+          <div class="section-label">
+            Co robimy
+          </div>
+
+          <h2 class="section-title">
+            Nasze usługi
+          </h2>
+
+          <div class="section-line"></div>
+
+        </div>
+
+
+        <div class="services-grid">
+
+
+          <article class="service-card">
+
+            <div class="service-image">
+
+              <img
+                src="https://images.unsplash.com/photo-1615906655593-ad0386982a0f?auto=format&fit=crop&w=1100&q=85"
+                alt="Serwis klimatyzacji samochodowej"
+                loading="lazy"
+              >
+
+            </div>
+
+
+            <div class="service-content">
+
+              <div class="service-icon">
+                ❄
+              </div>
+
+              <h3>
+                Klimatyzacja
+              </h3>
+
+              <p>
+                Serwis, odgrzybianie, diagnostyka,
+                naprawa i napełnianie klimatyzacji samochodowej.
+              </p>
+
+            </div>
+
+          </article>
+
+
+
+          <article class="service-card">
+
+            <div class="service-image">
+
+              <img
+                src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&w=1100&q=85"
+                alt="Serwis opon samochodowych"
+                loading="lazy"
+              >
+
+            </div>
+
+
+            <div class="service-content">
+
+              <div class="service-icon">
+                ◉
+              </div>
+
+              <h3>
+                Serwis opon
+              </h3>
+
+              <p>
+                Montaż, wyważanie, naprawa oraz wymiana opon.
+                Profesjonalny serwis kół.
+              </p>
+
+            </div>
+
+          </article>
+
+
+
+          <article class="service-card">
+
+            <div class="service-image">
+
+              <img
+                src="https://images.unsplash.com/photo-1517048676732-d65bc937f952?auto=format&fit=crop&w=1100&q=85"
+                alt="Diagnostyka komputerowa samochodu"
+                loading="lazy"
+              >
+
+            </div>
+
+
+            <div class="service-content">
+
+              <div class="service-icon">
+                ▣
+              </div>
+
+              <h3>
+                Diagnostyka komputerowa
+              </h3>
+
+              <p>
+                Precyzyjna diagnostyka elektroniki
+                i systemów samochodowych przy użyciu profesjonalnego sprzętu.
+              </p>
+
+            </div>
+
+          </article>
+
+
+
+          <article class="service-card">
+
+            <div class="service-image">
+
+              <img
+                src="https://images.unsplash.com/photo-1486006920555-c77dcf18193c?auto=format&fit=crop&w=1100&q=85"
+                alt="Naprawa silnika samochodowego"
+                loading="lazy"
+              >
+
+            </div>
+
+
+            <div class="service-content">
+
+              <div class="service-icon">
+                ⚙
+              </div>
+
+              <h3>
+                Naprawy silników
+              </h3>
+
+              <p>
+                Naprawy silników, osprzętu i podzespołów.
+                Od drobnych usterek po kompleksowe naprawy.
+              </p>
+
+            </div>
+
+          </article>
+
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+
+    <!-- =========================
+         DLACZEGO MY
+    ========================= -->
+
+    <section class="section why-us" id="o-nas">
+
+      <div class="container">
+
+        <div class="section-heading">
+
+          <div class="section-label">
+            Dlaczego my?
+          </div>
+
+          <h2 class="section-title">
+            Konkret zamiast obietnic
+          </h2>
+
+          <div class="section-line"></div>
+
+        </div>
+
+
+        <div class="advantages">
+
+
+          <article class="advantage">
+
+            <div class="advantage-icon">
+              ★
+            </div>
+
+            <h3>
+              Doświadczenie
+            </h3>
+
+            <p>
+              Ponad 15 lat praktyki
+              i tysiące zadowolonych klientów.
+            </p>
+
+          </article>
+
+
+          <article class="advantage">
+
+            <div class="advantage-icon">
+              ⚙
+            </div>
+
+            <h3>
+              Nowoczesny sprzęt
+            </h3>
+
+            <p>
+              Pracujemy na profesjonalnych
+              urządzeniach i technologii.
+            </p>
+
+          </article>
+
+
+          <article class="advantage">
+
+            <div class="advantage-icon">
+              ◇
+            </div>
+
+            <h3>
+              Uczciwość
+            </h3>
+
+            <p>
+              Zawsze uczciwa wycena
+              i pełna informacja o naprawie.
+            </p>
+
+          </article>
+
+
+          <article class="advantage">
+
+            <div class="advantage-icon">
+              ◷
+            </div>
+
+            <h3>
+              Szybka realizacja
+            </h3>
+
+            <p>
+              Szanujemy Twój czas
+              i działamy możliwie szybko.
+            </p>
+
+          </article>
+
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+
+    <!-- =========================
+         GALERIA
+    ========================= -->
+
+    <section class="section gallery">
+
+      <div class="container">
+
+        <div class="section-heading">
+
+          <div class="section-label">
+            Nasza praca
+          </div>
+
+          <h2 class="section-title">
+            Warsztat
+          </h2>
+
+          <div class="section-line"></div>
+
+        </div>
+
+
+        <div class="gallery-grid">
+
+
+          <div class="gallery-item">
+
+            <img
+              src="https://images.unsplash.com/photo-1504222490345-c075b6008014?auto=format&fit=crop&w=1100&q=85"
+              alt="Wnętrze warsztatu samochodowego"
+              loading="lazy"
+            >
+
+            <div class="gallery-overlay">
+              <span>Warsztat</span>
+            </div>
+
+          </div>
+
+
+          <div class="gallery-item">
+
+            <img
+              src="https://images.unsplash.com/photo-1530046339160-ce3e530c7d2f?auto=format&fit=crop&w=1100&q=85"
+              alt="Mechanik podczas pracy"
+              loading="lazy"
+            >
+
+            <div class="gallery-overlay">
+              <span>Precyzja</span>
+            </div>
+
+          </div>
+
+
+          <div class="gallery-item">
+
+            <img
+              src="https://images.unsplash.com/photo-1493238792000-8113da705763?auto=format&fit=crop&w=1100&q=85"
+              alt="Samochód w warsztacie"
+              loading="lazy"
+            >
+
+            <div class="gallery-overlay">
+              <span>Motoryzacja</span>
+            </div>
+
+          </div>
+
+
+          <div class="gallery-item">
+
+            <img
+              src="https://images.unsplash.com/photo-1597007066704-67bf2068d5b2?auto=format&fit=crop&w=1100&q=85"
+              alt="Narzędzia mechanika"
+              loading="lazy"
+            >
+
+            <div class="gallery-overlay">
+              <span>Profesjonalny sprzęt</span>
+            </div>
+
+          </div>
+
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+
+    <!-- =========================
+         KONTAKT
+    ========================= -->
+
+    <section class="section contact" id="kontakt">
+
+      <div class="container">
+
+        <div class="section-heading">
+
+          <div class="section-label">
+            Kontakt
+          </div>
+
+          <h2 class="section-title">
+            Znajdź nas
+          </h2>
+
+          <div class="section-line"></div>
+
+        </div>
+
+
+        <div class="contact-grid">
+
+
+          <div class="contact-info">
+
+
+            <div class="contact-row">
+
+              <div class="contact-icon">
+                ☎
+              </div>
+
+              <div>
+
+                <small>Telefon</small>
+
+                <a href="tel:+48123456789">
+                  +48 123 456 789
+                </a>
+
+              </div>
+
+            </div>
+
+
+            <div class="contact-row">
+
+              <div class="contact-icon">
+                ⌖
+              </div>
+
+              <div>
+
+                <small>Adres warsztatu</small>
+
+                <strong>
+                  ul. Warsztatowa 15<br>
+                  Twoje Miasto
+                </strong>
+
+              </div>
+
+            </div>
+
+
+            <div class="contact-row">
+
+              <div class="contact-icon">
+                ◷
+              </div>
+
+              <div>
+
+                <small>Godziny otwarcia</small>
+
+                <p>
+                  Poniedziałek – Piątek: 08:00 – 18:00<br>
+                  Sobota: 09:00 – 14:00
+                </p>
+
+              </div>
+
+            </div>
+
+
+            <div class="contact-row">
+
+              <div class="contact-icon">
+                ✉
+              </div>
+
+              <div>
+
+                <small>E-mail</small>
+
+                <a href="mailto:kontakt@mechanikakowalski.pl">
+                  kontakt@mechanikakowalski.pl
+                </a>
+
+              </div>
+
+            </div>
+
+
+            <a href="tel:+48123456789" class="btn">
+              ☎ Umów wizytę
+            </a>
+
+
+          </div>
+
+
+          <!-- GOOGLE MAPS -->
+
+          <div class="map-box">
+
+            <iframe
+              src="https://www.google.com/maps?q=ul.%20Warsztatowa%2015%2C%20Twoje%20Miasto&output=embed"
+              loading="lazy"
+              allowfullscreen
+              referrerpolicy="no-referrer-when-downgrade"
+              title="Lokalizacja Mechanika Kowalski na Google Maps">
+            </iframe>
+
+
+            <a
+              href="https://www.google.com/maps/search/?api=1&query=ul.%20Warsztatowa%2015%2C%20Twoje%20Miasto"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="map-button"
+            >
+              ⌖ Wyznacz trasę w Google Maps →
+            </a>
+
+          </div>
+
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+  </main>
+
+
+
+  <!-- =========================
+       FOOTER
+  ========================= -->
+
+  <footer>
+
+    <div class="container">
+
+      <div class="footer-grid">
+
+
+        <div class="footer-brand">
+
+          <a href="#start" class="logo js-close-menu">
+
+            <div class="logo-symbol" aria-hidden="true">
+
+              <div class="gear"></div>
+              <div class="wrench"></div>
+              <div class="wrench wrench-two"></div>
+
+            </div>
+
+
+            <div class="logo-text">
+
+              Mechanika
+
+              <span>Kowalski</span>
+
+              <small class="logo-subtitle">
+                Serwis samochodowy
+              </small>
+
+            </div>
+
+          </a>
+
+
+          <p class="footer-description">
+
+            Solidna mechanika. Bez ściemy.
+            Profesjonalny serwis samochodowy
+            dla kierowców, którzy cenią konkrety.
+
+          </p>
+
+        </div>
+
+
+        <div class="footer-column">
+
+          <h4>Menu</h4>
+
+          <div class="footer-links">
+
+            <a href="#start">Start</a>
+            <a href="#uslugi">Usługi</a>
+            <a href="#o-nas">O nas</a>
+            <a href="#kontakt">Kontakt</a>
+
+          </div>
+
+        </div>
+
+
+        <div class="footer-column">
+
+          <h4>Usługi</h4>
+
+          <div class="footer-links">
+
+            <a href="#uslugi">Klimatyzacja</a>
+            <a href="#uslugi">Serwis opon</a>
+            <a href="#uslugi">Diagnostyka komputerowa</a>
+            <a href="#uslugi">Naprawy silników</a>
+
+          </div>
+
+        </div>
+
+
+        <div class="footer-column">
+
+          <h4>Kontakt</h4>
+
+          <div class="footer-links">
+
+            <a href="tel:+48123456789">
+              +48 123 456 789
+            </a>
+
+            <a href="#kontakt">
+              ul. Warsztatowa 15
+            </a>
+
+            <a href="mailto:kontakt@mechanikakowalski.pl">
+              kontakt@mechanikakowalski.pl
+            </a>
+
+          </div>
+
+
+          <div class="socials">
+
+            <a href="#" class="social" aria-label="Facebook">
+              f
+            </a>
+
+            <a href="#" class="social" aria-label="Instagram">
+              ◎
+            </a>
+
+            <a href="#" class="social" aria-label="Google">
+              G
+            </a>
+
+          </div>
+
+        </div>
+
+
+      </div>
+
+
+      <div class="copyright">
+
+        © 2026 Mechanika Kowalski.
+        Wszelkie prawa zastrzeżone.
+
+      </div>
+
+
+    </div>
+
+  </footer>
+
+
+
+  <!-- =========================
+       MOBILE MENU JAVASCRIPT
+  ========================= -->
+
+  <script>
+
+    const menuToggle = document.getElementById("menuToggle");
+    const mobileMenu = document.getElementById("mobileMenu");
+    const mobileOverlay = document.getElementById("mobileOverlay");
+    const mobileLinks = document.querySelectorAll(".mobile-nav a");
+    const closeMenuLinks = document.querySelectorAll(".js-close-menu");
+
+
+    function openMenu() {
+
+      mobileMenu.classList.add("active");
+      mobileOverlay.classList.add("active");
+      menuToggle.classList.add("active");
+
+      document.body.classList.add("menu-open");
+
+      menuToggle.setAttribute("aria-expanded", "true");
+      menuToggle.setAttribute("aria-label", "Zamknij menu");
+
+    }
+
+
+    function closeMenu() {
+
+      mobileMenu.classList.remove("active");
+      mobileOverlay.classList.remove("active");
+      menuToggle.classList.remove("active");
+
+      document.body.classList.remove("menu-open");
+
+      menuToggle.setAttribute("aria-expanded", "false");
+      menuToggle.setAttribute("aria-label", "Otwórz menu");
+
+    }
+
+
+    menuToggle.addEventListener("click", function() {
+
+      if (mobileMenu.classList.contains("active")) {
+        closeMenu();
+      } else {
+        openMenu();
+      }
+
+    });
+
+
+    mobileOverlay.addEventListener("click", closeMenu);
+
+
+    /*
+      Po kliknięciu w:
+      USŁUGI
+      O NAS
+      KONTAKT
+
+      menu się zamyka, a strona płynnie
+      przewija do wybranej sekcji.
+    */
+
+    mobileLinks.forEach(link => {
+
+      link.addEventListener("click", function(event) {
+
+        event.preventDefault();
+
+        const targetId = this.getAttribute("href");
+
+        const target = document.querySelector(targetId);
+
+        closeMenu();
+
+
+        if (target) {
+
+          setTimeout(() => {
+
+            target.scrollIntoView({
+              behavior: "smooth",
+              block: "start"
+            });
+
+          }, 250);
+
+        }
+
+      });
+
+    });
+
+
+    closeMenuLinks.forEach(link => {
+
+      link.addEventListener("click", function() {
+        closeMenu();
+      });
+
+    });
+
+
+    /*
+      ESC zamyka menu.
+    */
+
+    document.addEventListener("keydown", function(event) {
+
+      if (event.key === "Escape") {
+        closeMenu();
+      }
+
+    });
+
+
+    /*
+      Jeżeli zmienimy orientację / szerokość
+      na desktop, menu mobilne zostaje zamknięte.
+    */
+
+    window.addEventListener("resize", function() {
+
+      if (window.innerWidth >= 950) {
+        closeMenu();
+      }
+
+    });
+
+  </script>
+
+</body>
+</html>
